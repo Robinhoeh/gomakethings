@@ -1,23 +1,39 @@
 // Toggle between seeing the password and not seeing it
 
 // 1. A way to listen for when the checkbox is checked or unchecked.
-const passApp = {};
+const app = {};
 
 //Reference all password fields
-passApp.loginPassword = document.querySelector('#password');
-passApp.currentPassword = document.querySelector('#current-password');
-passApp.newPassword = document.querySelector('#new-pw');
+app.loginPassword = document.querySelector('#password');
+app.currentPassword = document.querySelector('#current-pw');
+app.newPassword = document.querySelector('#new-pw');
+app.document = document;
+
 
 
 // Listen for clicks on checkboxes and change input type of passwords
-passApp.form = document.querySelector('form');
-passApp.checkbox = document.querySelector('input[name="show-passwords"]');
+// app.form = document.querySelector('form');
+// app.checkbox = document.querySelector('input[name="show-passwords"]');
 
-passApp.form.addEventListener('submit', (e) => {
+app.document.addEventListener('click', function (e) {
+  if (e.target.id === 'show-password') {
+    if(app.loginPassword.getAttribute('type') === 'password') {
+      app.loginPassword.setAttribute('type', 'text');
+    } else {
+      app.loginPassword.setAttribute('type', 'password');
+    }
+  }
+  if (e.target.id === 'show-passwords') {
+    if(app.currentPassword.getAttribute('type') === 'password' && app.newPassword.getAttribute('type') === 'password') {
+      app.currentPassword.setAttribute('type', 'text');
+      app.newPassword.setAttribute('type', 'text');
+    } else {
+      app.currentPassword.setAttribute('type', 'password');
+      app.newPassword.setAttribute('type', 'password');
+    }
+  }
+});
 
-    e.preventDefault();
-
-}, false);
 
 
 
