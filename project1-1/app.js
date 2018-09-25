@@ -4,9 +4,9 @@
 const app = {};
 
 //Reference all password fields
-app.loginPassword = document.querySelector('#password');
-app.currentPassword = document.querySelector('#current-pw');
-app.newPassword = document.querySelector('#new-pw');
+app.loginPasswordInput = document.querySelector('#password');
+app.currentPasswordInput = document.querySelector('#current-pw');
+app.newPasswordInput = document.querySelector('#new-pw');
 app.document = document;
 
 
@@ -15,21 +15,30 @@ app.document = document;
 // app.form = document.querySelector('form');
 // app.checkbox = document.querySelector('input[name="show-passwords"]');
 
+//listen for a click on entire document
 app.document.addEventListener('click', function (e) {
+  //if checkbox is selected
   if (e.target.id === 'show-password') {
-    if(app.loginPassword.getAttribute('type') === 'password') {
-      app.loginPassword.setAttribute('type', 'text');
+    // And, the input type is password
+    if(app.loginPasswordInput.getAttribute('type') === 'password') {
+      // switch the type to text so it can be read
+      app.loginPasswordInput.setAttribute('type', 'text');
     } else {
-      app.loginPassword.setAttribute('type', 'password');
+      // else, when button is clicked again, set it back to password
+      app.loginPasswordInput.setAttribute('type', 'password');
     }
   }
+  // if the checkbox is selected
   if (e.target.id === 'show-passwords') {
-    if(app.currentPassword.getAttribute('type') === 'password' && app.newPassword.getAttribute('type') === 'password') {
-      app.currentPassword.setAttribute('type', 'text');
-      app.newPassword.setAttribute('type', 'text');
+    //and the input type is assigned to password for both
+    if(app.currentPasswordInput.getAttribute('type') === 'password' && app.newPasswordInput.getAttribute('type') === 'password') {
+      // set it to type so you can see it
+      app.currentPasswordInput.setAttribute('type', 'text');
+      app.newPasswordInput.setAttribute('type', 'text');
     } else {
-      app.currentPassword.setAttribute('type', 'password');
-      app.newPassword.setAttribute('type', 'password');
+      // else, change them both back on click again
+      app.currentPasswordInput.setAttribute('type', 'password');
+      app.newPasswordInput.setAttribute('type', 'password');
     }
   }
 });
