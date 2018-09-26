@@ -11,9 +11,7 @@ app.document = document;
 
 
 
-// Listen for clicks on checkboxes and change input type of passwords
-// app.form = document.querySelector('form');
-// app.checkbox = document.querySelector('input[name="show-passwords"]');
+
 
 //listen for a click on entire document
 app.document.addEventListener('click', function (e) {
