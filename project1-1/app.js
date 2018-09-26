@@ -1,6 +1,4 @@
-// Toggle between seeing the password and not seeing it
 
-// 1. A way to listen for when the checkbox is checked or unchecked.
 const app = {};
 
 //Reference all password fields
@@ -9,15 +7,11 @@ app.currentPasswordInput = document.querySelector('#current-pw');
 app.newPasswordInput = document.querySelector('#new-pw');
 app.document = document;
 
-
-
-
-
-//listen for a click on entire document
+// listen for a click on entire document - using event
 app.document.addEventListener('click', function (e) {
   //if checkbox is selected
-  if (e.target.id === 'show-password') {
-    // And, the input type is password
+  if (e.target.id === 'show-password' && e.target.type === 'checkbox') {
+    // And, the input type  of password is password
     if(app.loginPasswordInput.getAttribute('type') === 'password') {
       // switch the type to text so it can be read
       app.loginPasswordInput.setAttribute('type', 'text');
@@ -27,7 +21,7 @@ app.document.addEventListener('click', function (e) {
     }
   }
   // if the checkbox is selected
-  if (e.target.id === 'show-passwords') {
+  if (e.target.id === 'show-passwords' && e.target.type === 'checkbox') {
     //and the input type is assigned to password for both
     if(app.currentPasswordInput.getAttribute('type') === 'password' && app.newPasswordInput.getAttribute('type') === 'password') {
       // set it to type so you can see it
@@ -45,6 +39,10 @@ app.document.addEventListener('click', function (e) {
 
 
 
-// 2. reference the password field and switch from password to text and vice versa
+
+
+
+
+
 
 
