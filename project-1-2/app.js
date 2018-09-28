@@ -22,7 +22,7 @@ app.document.addEventListener('click', (e) => {
   if(e.target.id === 'farenheit' && e.target.type === 'number') {
     //take number inputed by user and convert it to celcius
     // then make that the value of the celcius input
-    app.userFarenheitInput = Math.floor((app.farenheitInput.value - 32) * 5 / 9);
+    app.userFarenheitInput = Math.round((app.farenheitInput.value - 32) * 5 / 9);
     app.celciusInput.value = app.userFarenheitInput;
   } else {
       e.target.id === 'celcius' && e.target.type === 'number'
