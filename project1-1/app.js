@@ -29,11 +29,6 @@ app.document.addEventListener('click', function(e) {
 });
 
 
-  
-
-
-
-  
 
 
 
@@ -41,8 +36,13 @@ app.document.addEventListener('click', function(e) {
 
 
 
- 
-  
+
+
+
+
+
+
+
 
 
 
