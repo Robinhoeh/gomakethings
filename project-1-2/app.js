@@ -1,8 +1,8 @@
 // Namespace
 const app = {}
 // Reference elements
-app.farenheitInput = document.querySelector('#farenheit');
-app.celciusInput = document.querySelector('#celcius');
+app.farenheitInput = document.querySelector('#js-farenheit');
+app.celciusInput = document.querySelector('#js-celcius');
 app.document = document;
 
 // Listen for input changes
