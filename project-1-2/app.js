@@ -18,7 +18,7 @@ app.farenheitInput = document.querySelector('#farenheit');
 app.celciusInput = document.querySelector('#celcius');
 app.numberInput = document.querySelector('input[type="number"]');
 
-
+// Listen for input changes
 app.numberInput.addEventListener('input', (e) => {
   if(e.target.id === 'farenheit' && e.target.type === 'number') {
     //take number inputed by user and convert it to celcius
