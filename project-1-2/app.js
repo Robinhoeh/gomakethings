@@ -19,18 +19,20 @@ app.celciusInput = document.querySelector('#celcius');
 app.numberInput = document.querySelector('input[type="number"]');
 
 
-app.numberInput.addEventListener('click', (e) => {
+app.numberInput.addEventListener('input', (e) => {
   if(e.target.id === 'farenheit' && e.target.type === 'number') {
     //take number inputed by user and convert it to celcius
     // then make that the value of the celcius input
     app.userFarenheitInput = Math.round((app.farenheitInput.value - 32) * 5 / 9);
+    // set the value of celcius to the converted value of farenheit
     app.celciusInput.value = app.userFarenheitInput;
   } else {
       e.target.id === 'celcius' && e.target.type === 'number'
     //take number inputed by user and convert it to farenheit
     //then make that the value of farenheit
-      app.celciusInput = Math.round((app.celciusInput.value * 9 / 5) + 32);
-      app.farenheitInput.value = app.celciusInput;
+      app.userCelciusInput = Math.round((app.celciusInput.value * 9 / 5) + 32);
+      //set the value of farenheit to the converted value of celcius
+      app.farenheitInput.value = app.userCelciusInput;
   }
 })
 
