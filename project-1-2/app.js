@@ -16,9 +16,10 @@ const app = {}
 // Reference elements
 app.farenheitInput = document.querySelector('#farenheit');
 app.celciusInput = document.querySelector('#celcius');
-app.document = document;
+app.numberInput = document.querySelector('input[type="number"]');
 
-app.document.addEventListener('click', (e) => {
+
+app.numberInput.addEventListener('click', (e) => {
   if(e.target.id === 'farenheit' && e.target.type === 'number') {
     //take number inputed by user and convert it to celcius
     // then make that the value of the celcius input
