@@ -16,10 +16,15 @@ const app = {}
 // Reference elements
 app.farenheitInput = document.querySelector('#farenheit');
 app.celciusInput = document.querySelector('#celcius');
-app.numberInput = document.querySelector('input[type="number"]');
+app.document = document;
+
+// Convert Farenheit -> Celcius V.versa
+
+
+
 
 // Listen for input changes
-app.numberInput.addEventListener('input', (e) => {
+function inputHandler(e) {
   if(e.target.id === 'farenheit' && e.target.type === 'number') {
     //take number inputed by user and convert it to celcius
     // then make that the value of the celcius input
@@ -34,5 +39,8 @@ app.numberInput.addEventListener('input', (e) => {
       //set the value of farenheit to the converted value of celcius
       app.farenheitInput.value = app.userCelciusInput;
   }
-})
+}
+
+app.document.addEventListener('input', inputHandler, false);
+
 
