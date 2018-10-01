@@ -1,0 +1,69 @@
+*:before,
+		*:after {
+			box-sizing: border-box;
+		}
+		/**
+		 * Layout
+		 */
+		body {
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+			font-size: 112.5%;
+			margin-left: auto;
+			margin-right: auto;
+			max-width: 40em;
+			width: 88%;
+		}
+		.row {
+			margin-left: -1.4%;
+      margin-right: -1.4%;
+      display: flex;
+		}
+		.grid,
+		.grid {
+			float: left;
+			padding-left: 1.4%;
+			padding-right: 1.4%;
+			width: 100%;
+		}
+		.grid-content {
+			width: 45%;
+		}
+		.grid-equals {
+			width: 10%;
+		}
+		.row:before,
+		.row:after {
+			display: table;
+			content: " ";
+		}
+		.row:after {
+      clear: both;
+		}
+		/**
+		 * Forms
+		 */
+		input {
+			font-size: 1.2em;
+			padding: 0.5em 1em;
+			width: 100%;
+		}
+		label {
+			background-color: #f7f7f7;
+			border: 1px solid #e5e5e5;
+			border-top: 0;
+			display: block;
+			font-weight: bold;
+			padding: 0.25em 0.5em;
+		}
+		/**
+		 * Utilities
+		 */
+		.font-big {
+			font-size: 1.2em;
+		}
+		.padding {
+			padding: 0.5em 0;
+		}
+		.text-center {
+			text-align: center;
+		}
