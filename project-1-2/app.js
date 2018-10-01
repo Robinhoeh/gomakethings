@@ -7,11 +7,12 @@ app.document = document.documentElement;
 
 // Listen for input changes
 app.document.addEventListener('input', function (e) {
+  if (e.target.value.length < 1) return;
   //if target matches id of farenheit or is a number
   if(e.target.id === 'js-farenheit' && e.target.type === 'number') {
     app.celciusInput.value = farenheitToCelcius(e.target.value)
-  } if (e.target.id === 'js-celcius' && e.target.type === 'number');
-      app.celciusInput.value = farenheitToCelcius(e.target.value);
+  } else (e.target.id === 'js-celcius' && e.target.type === 'number');
+      app.farenheitInput.value = celciusToFarenheit(e.target.value);
 }, false);
 
 
