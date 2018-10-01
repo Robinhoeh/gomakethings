@@ -3,19 +3,24 @@ const app = {}
 // Reference elements
 app.farenheitInput = document.querySelector('#js-farenheit');
 app.celciusInput = document.querySelector('#js-celcius');
-app.document = document;
+app.document = document.documentElement;
 
 // Listen for input changes
-function inputHandler(e) {
-  if(e.target.id === 'farenheit' && e.target.type === 'number') {
-    app.userFarenheitInput = Math.round((app.farenheitInput.value - 32) * 5 / 9);
-    app.celciusInput.value = app.userFarenheitInput;
-  } else {
-      e.target.id === 'celcius' && e.target.type === 'number'
-      app.userCelciusInput = Math.round((app.celciusInput.value * 9 / 5) + 32);
-      app.farenheitInput.value = app.userCelciusInput;
-  }
+app.document.addEventListener('input', function (e) {
+  //if target matches id of farenheit or is a number
+  if(e.target.id === 'js-farenheit' && e.target.type === 'number') {
+    app.celciusInput.value = farenheitToCelcius(e.target.value)
+  } if (e.target.id === 'js-celcius' && e.target.type === 'number');
+      app.celciusInput.value = farenheitToCelcius(e.target.value);
+}, false);
+
+
+function farenheitToCelcius (temp) {
+ return Math.round((temp - 32) * 5 / 9);
 }
-app.document.addEventListener('input', inputHandler, false);
+
+function celciusToFarenheit(temp) {
+  return Math.round((temp * 9 / 5) + 32);
+}
 
 
