@@ -12,7 +12,7 @@ app.document.addEventListener('input', function (e) {
   //if target matches id of farenheit and is a number
   if(e.target.id === 'js-farenheit' && e.target.type === 'number') {
     // the value of F converted to Celcius, display dynamic value in both inputs
-    app.celciusInput.value = farenheitToCelcius(e.target.value)
+    app.celciusInput.value = farenheitToCelcius(e.target.value);
   } else {
     // if input is C and a number
     e.target.id === 'js-celcius' && e.target.type === 'number';
