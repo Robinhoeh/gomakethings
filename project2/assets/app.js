@@ -58,11 +58,9 @@ function makeApiCall () {
     posts.forEach(function (post) {
       console.log(post);
       //Disaply data to the DOM
-      const listUl = document.querySelector('.list-header');
       const postItem = document.createElement('li');
       postItem.textContent = `${post}`;
-      console.log(postItem);
-      listUl.appendChild(postItem);
+      app.quoteBox.appendChild(postItem);
     });
   });
 }
