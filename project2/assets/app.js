@@ -7,10 +7,10 @@ How should clicking the More Ron button work, and what can you do to avoid writi
 
 // Reference to buttons
 const app = {}
-app.quoteBox = document.querySelector('.quoteBox');
-app.apiCallButton = document.querySelector('.api-call-button');
-app.secondHeader = document.querySelector('.first-header');
-app.errorHeader = document.querySelector('.error-header');
+app.quoteBox = document.querySelector('.js-quote-box');
+app.apiCallButton = document.querySelector('.js-api-call-button');
+app.firstHeader = document.querySelector('.first-header');
+
 
 // focus of button on page load
 app.apiCallButton.focus();
@@ -25,6 +25,11 @@ const makeRequest = function (url, method, success, failure, always) {
   xhr.onreadystatechange = function () {
      // Only run if the request is complete
     if (xhr.readyState !== 4) return;
+    const errorHeader = document.createElement('h3');
+    errorHeader.textContent = xhr.statusText;
+    const appElement = document.querySelector('.app');
+    appElement.appendChild(errorHeader);
+    console.log(xhr.statusText);
     // Process our return data
     if (xhr.status >= 200 && xhr.status < 300) {
       // Run the success callback
@@ -50,7 +55,7 @@ const makeRequest = function (url, method, success, failure, always) {
 
 // Get a list of posts
 function makeApiCall () {
-  makeRequest('http://ron-swanson-quotes.herokuapp.com/v2/quotes','GET', function (posts) {
+  makeRequest('http://ron-swanson-quotes.herokuapp.com/2/quotes','GET', function (posts) {
     posts.forEach(function (post) {
       //Disaply data to the DOM
       const postItem = document.createElement('li');
