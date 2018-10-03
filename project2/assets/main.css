@@ -1,0 +1,16 @@
+.app{
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+.api-call-button{
+  background: none;
+  border: none;
+  background: lightblue;
+  padding: 20px;
+  width: 244px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-family: sans-serif;
+  font-size: 20px;
+}

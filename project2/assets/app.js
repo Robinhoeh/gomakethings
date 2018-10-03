@@ -14,7 +14,7 @@ How should clicking the More Ron button work, and what can you do to avoid writi
 // Reference to buttons
 const app = {}
 app.quoteBox = document.querySelector('.quoteBox');
-app.apiCallButton = document.querySelector('.apiCallButton');
+app.apiCallButton = document.querySelector('.api-call-button');
 app.secondHeader = document.querySelector('.second-header');
 app.errorHeader = document.querySelector('.error-header');
 app.document = document.querySelector('document');
@@ -38,7 +38,7 @@ const makeRequest = function (url, method, success, failure, always) {
     } else {
       // Run the failure callback
       if (failure && typeof failure === 'function') {
-          failure(xhr);
+          failure(xhr)
       }
     }
     if (always && typeof always === 'function') {
@@ -56,11 +56,12 @@ const makeRequest = function (url, method, success, failure, always) {
 function makeApiCall () {
   makeRequest('http://ron-swanson-quotes.herokuapp.com/v2/quotes','GET', function (posts) {
     posts.forEach(function (post) {
-      console.log(post);
       //Disaply data to the DOM
       const postItem = document.createElement('li');
       postItem.textContent = `${post}`;
       app.quoteBox.appendChild(postItem);
+      //stop quote from repeating itself
+
     });
   });
 }
