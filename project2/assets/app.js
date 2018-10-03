@@ -1,23 +1,19 @@
 /*Some considerations
-What should users see when the page first loads but the API hasn’t returned a quote yet?
+
 What should the app do if the API fails to return a quote?
 
 How should clicking the More Ron button work, and what can you do to avoid writing the same quote twice?
 */
 
-// when somoneclick on the button
-// make a call to the API
-// display the quote on the page
-// if request fails, display fail message
-// stop if from return same quote twice
-
 // Reference to buttons
 const app = {}
 app.quoteBox = document.querySelector('.quoteBox');
 app.apiCallButton = document.querySelector('.api-call-button');
-app.secondHeader = document.querySelector('.second-header');
+app.secondHeader = document.querySelector('.first-header');
 app.errorHeader = document.querySelector('.error-header');
-app.document = document.querySelector('document');
+
+// focus of button on page load
+app.apiCallButton.focus();
 
 
 const makeRequest = function (url, method, success, failure, always) {
