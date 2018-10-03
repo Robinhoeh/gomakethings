@@ -27,8 +27,10 @@ const makeRequest = function (url, method, success, failure, always) {
      // Only run if the request is complete
     if (xhr.readyState !== 4) return;
     const errorHeader = document.createElement('h3');
+    errorHeader.classList.add('error-header');
     errorHeader.textContent = xhr.statusText;
     app.appElement.appendChild(errorHeader);
+
     // Process our return data
     if (xhr.status >= 200 && xhr.status < 300) {
       // Run the success callback
@@ -54,7 +56,7 @@ const makeRequest = function (url, method, success, failure, always) {
 
 // Get a list of posts
 function makeApiCall () {
-  makeRequest('http://ron-swanson-quotes.herokuapp.com/2/quotes','GET', function (posts) {
+  makeRequest('http://ron-swanson-quotes.herokuapp.com/v2/quotes','GET', function (posts) {
     posts.forEach(function (post) {
       //Disaply data to the DOM
       const postItem = document.createElement('li');
