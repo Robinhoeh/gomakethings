@@ -10,6 +10,7 @@ const app = {}
 app.quoteBox = document.querySelector('.js-quote-box');
 app.apiCallButton = document.querySelector('.js-api-call-button');
 app.firstHeader = document.querySelector('.first-header');
+app.appElement = document.querySelector('.app');
 
 
 // focus of button on page load
@@ -27,9 +28,7 @@ const makeRequest = function (url, method, success, failure, always) {
     if (xhr.readyState !== 4) return;
     const errorHeader = document.createElement('h3');
     errorHeader.textContent = xhr.statusText;
-    const appElement = document.querySelector('.app');
-    appElement.appendChild(errorHeader);
-    console.log(xhr.statusText);
+    app.appElement.appendChild(errorHeader);
     // Process our return data
     if (xhr.status >= 200 && xhr.status < 300) {
       // Run the success callback
