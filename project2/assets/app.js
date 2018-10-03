@@ -57,7 +57,7 @@ const makeRequest = function (url, method, success, failure, always) {
 
 // Get a list of posts
 function makeApiCall () {
-  makeRequest('http://ron-swanson-quotes.herokuapp.com/2/quotes','GET', function (posts) {
+  makeRequest('http://ron-swanson-quotes.herokuapp.com/v2/quotes','GET', function (posts) {
     posts.forEach(function (post) {
       //Disaply data to the DOM
       const postItem = document.createElement('li');
@@ -69,6 +69,7 @@ function makeApiCall () {
   });
 }
 
+makeApiCall();
 app.apiCallButton.addEventListener('click', makeApiCall);
 
 
