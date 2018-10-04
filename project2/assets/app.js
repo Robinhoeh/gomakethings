@@ -17,7 +17,7 @@ app.appElement = document.querySelector('.app');
 app.apiCallButton.focus();
 
 
-const makeRequest = function (url, method, success, failure, always) {
+const makeRequest = function (url, method, success, always) {
   // Make sure a URL and method were provided
   if (!url || !method) return;
   // Set up our HTTP request
@@ -60,9 +60,11 @@ function makeApiCall () {
   makeRequest('http://ron-swanson-quotes.herokuapp.com/v2/quotes','GET', function (posts) {
     posts.forEach(function (post) {
       //Disaply data to the DOM
-      const postItem = document.createElement('li');
+      const postItem = document.createElement('p');
       postItem.textContent = `${post}`;
-      app.quoteBox.appendChild(postItem);
+      app.quoteBox.append(postItem);
+
+
       //stop quote from repeating itself
 
     });
@@ -70,6 +72,6 @@ function makeApiCall () {
 }
 
 makeApiCall();
-app.apiCallButton.addEventListener('click', makeApiCall);
+app.apiCallButton.addEventListener('click', makeApiCall, false);
 
 
