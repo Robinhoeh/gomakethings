@@ -13,6 +13,8 @@ app.apiCallButton.focus();
 app.makeRequest = function (url, method, success, failure) {
   // Make sure a URL and method were provided
   if (!url || !method) return;
+  //Prevent making 2nd api call during 1st call
+  app.apiCallButton.disabled = true;
   // Set up our HTTP request
   const xhr = new XMLHttpRequest();
   // Setup our listener to process request state changes
@@ -37,6 +39,8 @@ app.makeRequest = function (url, method, success, failure) {
           failure(xhr)
       }
     }
+    // Allow user to click button again
+    api.apiCallButton.disabled = false;
   };
 
   // Create and send a request
