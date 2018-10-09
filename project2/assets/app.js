@@ -9,59 +9,42 @@ app.appElement = document.querySelector('.app');
 // focus of button on page load
 app.apiCallButton.focus();
 
+app.makeRequest = function () {
 
-app.makeRequest = function (url, method, success, failure) {
-  // Make sure a URL and method were provided
-  if (!url || !method) return;
   //Prevent making 2nd api call during 1st call
   app.apiCallButton.disabled = true;
+
   // Set up our HTTP request
   const xhr = new XMLHttpRequest();
+
   // Setup our listener to process request state changes
   xhr.onreadystatechange = function () {
      // Only run if the request is complete
     if (xhr.readyState !== 4) return;
+
+    // Process our return data
+    if (xhr.status >= 200 && xhr.status < 300) {
+      app.quoteBox.textContent = JSON.parse(xhr.responseText);
+      // Run the success callback
+    } else {
+      // Run the failure callback
+      app.quoteBox.textContent = 'Oops something went wrong. Please try again in a few secs!'
       const errorHeader = document.createElement('h3');
       errorHeader.classList.add('error-header');
       errorHeader.textContent = `😭${xhr.statusText}😭`;
       app.appElement.appendChild(errorHeader);
-
-    // Process our return data
-    if (xhr.status >= 200 && xhr.status < 300) {
-      errorHeader.style.display = 'none';
-      // Run the success callback
-      if (success && typeof success === 'function') {
-          success(JSON.parse(xhr.responseText), xhr);
-      }
-    } else {
-      // Run the failure callback
-      if (failure && typeof failure === 'function') {
-          failure(xhr)
-      }
     }
     // Allow user to click button again regardless of succes or failure
-    api.apiCallButton.disabled = false;
+    app.apiCallButton.disabled = false;
   };
 
   // Create and send a request
   // Defaults to GET
-  xhr.open(method, url);
+  xhr.open('GET', 'https://ron-swanson-quotes.herokuapp.com/v2/quotes');
   xhr.send();
 };
 
-// Get a list of posts
-function makeApiCall () {
-  app.makeRequest('http://ron-swanson-quotes.herokuapp.com/v2/quotes','GET', function (posts) {
-    posts.forEach(function (post) {
-      //Disaply data to the DOM
-      app.quoteBox.textContent = post;
-      //stop quote from repeating itself
-
-    });
-  });
-}
-
-makeApiCall();
-app.apiCallButton.addEventListener('click', makeApiCall, false);
+app.makeRequest();
+app.apiCallButton.addEventListener('click', app.makeRequest, false);
 
 
