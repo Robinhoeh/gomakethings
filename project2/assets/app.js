@@ -39,7 +39,7 @@ app.makeRequest = function (url, method, success, failure) {
           failure(xhr)
       }
     }
-    // Allow user to click button again
+    // Allow user to click button again regardless of succes or failure
     api.apiCallButton.disabled = false;
   };
 
