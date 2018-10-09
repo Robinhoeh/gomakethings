@@ -1,10 +1,3 @@
-/*Some considerations
-
-What should the app do if the API fails to return a quote?
-
-How should clicking the More Ron button work, and what can you do to avoid writing the same quote twice?
-*/
-
 // Reference to buttons
 const app = {}
 app.quoteBox = document.querySelector('.js-quote-box');
@@ -17,7 +10,7 @@ app.appElement = document.querySelector('.app');
 app.apiCallButton.focus();
 
 
-app.makeRequest = function (url, method, success, always) {
+app.makeRequest = function (url, method, success, failure) {
   // Make sure a URL and method were provided
   if (!url || !method) return;
   // Set up our HTTP request
@@ -26,10 +19,10 @@ app.makeRequest = function (url, method, success, always) {
   xhr.onreadystatechange = function () {
      // Only run if the request is complete
     if (xhr.readyState !== 4) return;
-    const errorHeader = document.createElement('h3');
-    errorHeader.classList.add('error-header');
-    errorHeader.textContent = `😭${xhr.statusText}😭`;
-    app.appElement.appendChild(errorHeader);
+      const errorHeader = document.createElement('h3');
+      errorHeader.classList.add('error-header');
+      errorHeader.textContent = `😭${xhr.statusText}😭`;
+      app.appElement.appendChild(errorHeader);
 
     // Process our return data
     if (xhr.status >= 200 && xhr.status < 300) {
@@ -44,9 +37,6 @@ app.makeRequest = function (url, method, success, always) {
           failure(xhr)
       }
     }
-    if (always && typeof always === 'function') {
-      always(JSON.parse(xhr.responseText), xhr);
-    }
   };
 
   // Create and send a request
@@ -60,9 +50,7 @@ function makeApiCall () {
   app.makeRequest('http://ron-swanson-quotes.herokuapp.com/v2/quotes','GET', function (posts) {
     posts.forEach(function (post) {
       //Disaply data to the DOM
-      const postItem = document.createElement('p');
-      postItem.textContent = `${post}`;
-      app.quoteBox.append(postItem);
+      app.quoteBox.textContent = post;
       //stop quote from repeating itself
 
     });
