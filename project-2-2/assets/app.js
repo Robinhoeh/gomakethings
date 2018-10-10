@@ -18,55 +18,54 @@ newsApp.sanitizeHTML = function (str) {
 
 newsApp.renderArticles = function(articles) {
   newsApp.content = '';
-  articles.forEach( article => {
+  articles.forEach( function(article) {
     newsApp.content +=
-    `<li>
-      <strong><a href=`${newsApp.sanatizeHTML(article.url)}${newsApp.sanatizeHTML(article.title)}`</a></strong><br>
+    `<li><strong>
+      <a href="${newsApp.sanatizeHTML(article.url)}${newsApp.sanatizeHTML(article.title)}">
+      </a></strong><br>
       <span class="text-muted text-small">${newsApp.sanatizeHTML(article.byline)}</span><br>
-      <span class="text-small>${newsApp.sanatizeHTML(article.abstract)}</span>
+      <span class="text-small">${newsApp.sanatizeHTML(article.abstract)}</span>
       </li>`
   });
 };
 
 
-
 //Render section helper function
 newsApp.renderSection = function(articles, title) {
   articles = JSON.parse(articles.responseText).results.slice(0, newsApp.articleCount);
-  newsApp.section = document.createElement('div');
-  newsApp.section.id = `section-${title}`;
-  newsApp.section.innerHTML = `
+  const section = document.createElement('div');
+  section.id = `section-${title}`;
+  section.innerHTML = `
     <h2 class="title-case">${title}</h2>
     <ol>${newsApp.renderedArticles(articles)}</ol>
   `;
-  newsApp.app.append(newsApp.section);
+  newsApp.app.append(section);
 }
-
 
 
 newsApp.makeRequest = function(section) {
 
-  newsApp.url = `https://api.nytimes.com/svc/topstories/v2${newsApp.section}.json?api-key=${newsApp.apiKey}`;
+  const url = `https://api.nytimes.com/svc/topstories/v2${section}.json?api-key=${newsApp.apiKey}`;
   // Setup HTTP request
-  newsApp.xhr = new XMLHttpRequest();
+  const xhr = new XMLHttpRequest();
 
-  newsApp.xhr.onload = function() {
-    if(newsApp.xhr.readyState !== 4) return;
+  xhr.onload = function() {
+    if(xhr.onreadystatechange !== 4) return;
 
-    if(newsApp.xhr.status >= 200 && newsApp.xhr.status < 300) {
-      renderSection(newsApp.xhr, newsApp.section)
+    if(xhr.status >= 200 && xhr.status < 300) {
+      newsApp.renderSection(xhr, section)
     }
   }
-  newsApp.xhr.open('GET', newsApp.url, true);
-  newsApp.xhr.send();
+  xhr.open('GET', url, true);
+  xhr.send();
 };
 
-// Call NYTimes API
 
+// Call NYTimes API
 newsApp.getArticles = function() {
-  newsApp.sections.forEach(function () {
+  newsApp.sections.forEach(function (section, index) {
     //make request
-    newsApp.makeRequest(newsApp.section);
+    newsApp.makeRequest(section);
   });
 };
 
