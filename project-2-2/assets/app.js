@@ -50,7 +50,8 @@ newsApp.makeRequest = function(section) {
   const xhr = new XMLHttpRequest();
 
   xhr.onload = function() {
-    if(xhr.onreadystatechange !== 4) return;
+
+    console.log(JSON.parse(xhr.responseText));
 
     if(xhr.status >= 200 && xhr.status < 300) {
       newsApp.renderSection(xhr, section)
