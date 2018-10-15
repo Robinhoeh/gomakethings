@@ -14,8 +14,20 @@ As the user types, the .word-count and .character-count elements should update t
 
 // Variables
 const wordApp = {};
-wordApp.document.querySelector('.app');
-wordApp.document.querySelector('.js-word-count');
-wordApp.document.querySelector('.js-character-count')
+wordApp.app = document.querySelector('.app');
+wordApp.wordWord = document.querySelector('.js-word-count');
+wordApp.charCount = document.querySelector('.js-character-count');
+wordApp.textArea = document.querySelector('.js-text-area');
+
+
+wordApp.amountOfChar = (e) =>  {
+  wordApp.charCount.textContent = e.target.value.length;
+}
+
+wordApp.textArea.addEventListener('keyup', wordApp.amountOfChar, false);
+
+
+
+
 
 
