@@ -5,26 +5,37 @@ How do you deal with things like double spaces after periods, or someone who acc
 As the user types, the .word-count and .character-count elements should update to show the number of words and characters, respectively.
 */
 
-// Initiate reference to DOM elements that get updated
-// Listen for user input in text area
-// Constantly check length of word every keydown/keyup
-// Update the word count variable
+
 // Constantly check length of entire character count
 // Update the character count variable
+
+// check for space after any letter
+// space implies character count
 
 // Variables
 const wordApp = {};
 wordApp.app = document.querySelector('.app');
-wordApp.wordWord = document.querySelector('.js-word-count');
-wordApp.charCount = document.querySelector('.js-character-count');
+wordApp.wordCountEl = document.querySelector('.js-word-count');
+wordApp.charLength = document.querySelector('.js-character-count');
 wordApp.textArea = document.querySelector('.js-text-area');
 
-
-wordApp.amountOfChar = (e) =>  {
-  wordApp.charCount.textContent = e.target.value.length;
+//Check amount of characters, update the DOM
+wordApp.amountOfChar = e =>  {
+  wordApp.charLength.textContent = e.target.value.length;
 }
 
 wordApp.textArea.addEventListener('keyup', wordApp.amountOfChar, false);
+
+
+//Check word count
+wordApp.wordCount = e => {
+  wordApp.regex = /\s+/gi;
+  wordApp.wordCountEl.textContent = e.target.value.trim().replace(wordApp.regex, ' ').split(' ');
+}
+
+wordApp.textArea.addEventListener('keyup', wordApp.wordCount, false);
+
+
 
 
 
