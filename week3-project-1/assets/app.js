@@ -30,7 +30,11 @@ wordApp.textArea.addEventListener('keyup', wordApp.amountOfChar, false);
 //Check word count
 wordApp.wordCount = e => {
   wordApp.regex = /\s+/gi;
-  wordApp.wordCountEl.textContent = e.target.value.trim().replace(wordApp.regex, ' ').split(' ');
+  wordApp.wordCountEl.textContent = wordApp.textArea.value.trim().replace(wordApp.regex, ' ').split(' ').length;
+
+
+
+  // var wordCount = value.trim().replace(regex, ' ').split(' ').length;
 }
 
 wordApp.textArea.addEventListener('keyup', wordApp.wordCount, false);
