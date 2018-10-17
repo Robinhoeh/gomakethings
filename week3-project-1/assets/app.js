@@ -30,7 +30,7 @@ const inputHandler = () => {
     wordApp.wordCountEl.textContent = wordApp.textArea.value
       .trim()//remove all white space
       .replace(wordApp.regex, ' ')//replace every character with a space
-      .split(' ')//
+      .split(' ')//split every time there is a space
       .length;//
   }
 
