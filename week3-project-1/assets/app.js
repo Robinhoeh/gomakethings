@@ -14,25 +14,31 @@ wordApp.textArea = document.querySelector('.js-text-area');
 // Autofocus on textarea
 wordApp.textArea.focus();
 
-//Check amount of characters, update the DOM
-wordApp.amountOfChar = e =>  {
-  wordApp.charLength.textContent = e.target.value.length;
+const inputHandler = () => {
+
+  //Check amount of characters, update the DOM
+  wordApp.amountOfChar = e =>  {
+    wordApp.charLength.textContent = e.target.value.length;
+  }
+
+  wordApp.textArea.addEventListener('keyup', wordApp.amountOfChar, false);
+
+
+  //Check word count
+  wordApp.wordCount = () => {
+    wordApp.regex = /\s+/gi;
+    wordApp.wordCountEl.textContent = wordApp.textArea.value
+      .trim()//remove all white space
+      .replace(wordApp.regex, ' ')//replace every character with a space
+      .split(' ')//
+      .length;//
+  }
+
+  wordApp.textArea.addEventListener('keyup', wordApp.wordCount, false);
 }
 
-wordApp.textArea.addEventListener('keyup', wordApp.amountOfChar, false);
+inputHandler();
 
-
-//Check word count
-wordApp.wordCount = () => {
-  wordApp.regex = /\s+/gi;
-  wordApp.wordCountEl.textContent = wordApp.textArea.value
-    .trim()//remove all white space
-    .replace(wordApp.regex, ' ')//replace every character with a space
-    .split(' ')//
-    .length;//
-}
-
-wordApp.textArea.addEventListener('keyup', wordApp.wordCount, false);
 
 
 
