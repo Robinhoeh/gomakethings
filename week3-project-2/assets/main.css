@@ -86,3 +86,10 @@
 		.text-muted {
 			color: #808080;
 		}
+
+		/* Monster Images */
+
+		.monster1{
+			display: none;
+		}
+

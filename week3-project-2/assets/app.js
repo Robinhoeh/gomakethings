@@ -1,7 +1,13 @@
 // The monsters and socks
-var monsters = [
-  'sock!',
-  'monster1.svg',
+const monsters = [
+  sock = {
+    title: 'sock!',
+    img: ''
+  },
+  monsterOne = {
+    title: 'monster1',
+    img: 'monster1.svg'
+  },
   'monster2.svg',
   'monster3.svg',
   'monster4.svg',
