@@ -8,7 +8,10 @@ const monsters = [
     title: 'monster1',
     img: 'monster1.svg'
   },
-  'monster2.svg',
+  monsterTwo = {
+    title: 'monster2',
+    img: 'monster2.svg'
+  },
   'monster3.svg',
   'monster4.svg',
   'monster5.svg',
@@ -19,3 +22,11 @@ const monsters = [
   'monster10.svg',
   'monster11.svg'
 ];
+
+// when someone click on a door, a monster will appear
+// listen for click on door
+// hide door image and display moster image
+
+const monApp = {};
+
+monApp.document.querySelector('.door-image')
