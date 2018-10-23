@@ -91,7 +91,7 @@
 
 		.monster1{
 			/* display: none; */
-			background-image: url("data:image/svg+xml;utf8,<svg width="80" height="47" xmlns="http://www.w3.org/2000/svg" aria-labelledby="title-monster1" class="monster1">
+			background-image: url("data:image/svg+xml;utf8,<svg width='80' height='47' xmlns='http://www.w3.org/2000/svg' aria-labelledby='title-monster1' class='monster1'">
         <title id="title-monster1">Monster 1</title>
         <g fill-rule="nonzero" fill="#daa829">
           <path d="M11.676 5.718c-1.352.111-2.516-.513-2.516-.513 3.393-.45 2.643-4.591 2.643-4.591-3.771.681-3.756 3.191-4.079 2.96-.325-.232-.555-1.623-.555-1.623C5.76 3.098 5.681 6.767 5.681 6.767c5.048 1.165 5.995-1.049 5.995-1.049z" />

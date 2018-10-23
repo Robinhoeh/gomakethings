@@ -1,17 +1,8 @@
 // The monsters and socks
 const monsters = [
-  sock = {
-    title: 'sock!',
-    img: ''
-  },
-  monsterOne = {
-    title: 'monster1',
-    img: 'monster1.svg'
-  },
-  monsterTwo = {
-    title: 'monster2',
-    img: 'monster2.svg'
-  },
+  'sock',
+  'monster1.svg',
+  'monster2.svg',
   'monster3.svg',
   'monster4.svg',
   'monster5.svg',
@@ -29,17 +20,54 @@ const monsters = [
 
 const monApp = {};
 
+monApp.app = document.querySelector('.app');
 monApp.grid = document.querySelector('.grid');
-monApp.monsterOne = document.querySelector('.monster1');
 
-// Main function
-const startGame = () => {
+monApp.shuffle = function (array) {
 
-  monApp.grid.addEventListener('click', () => {
-    monApp.monsterOne.classList.toggle('.monster1')
-  }, false);
+  let currentIndex = array.length;
+  let temporaryValue;
+  let randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+};
+
+monApp.startGame = () => {
+
+  monApp.app.classList.add('row');
+  //shuffle monsters array
+  monApp.randomMonsters = monApp.shuffle(monsters);
+  //Reference list of monsters
+  monApp.markup = getMarkup(randomMonsters);
 
 
+  //Helper functions
+  monApp.getMarkup = (monsters) => {
+    let markup = "";
+    monsters.forEach((monster) => {
+      markup += `
+      <div class="grid" data-monster="${monster}">
+        <button class="btn-unstyled"><img alt="Click Me" src="door.svg"></button>
+      </div>
+      `
+    })
+    return monApp.markup;
+  }
+
+  // inject markup to App element
+  monApp.app.innerHTML = monApp.markup;
 }
 
-startGame();
+monApp.startGame();
