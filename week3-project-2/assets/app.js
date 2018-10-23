@@ -29,4 +29,15 @@ const monsters = [
 
 const monApp = {};
 
-monApp.document.querySelector('.door-image')
+monApp.doorImage = document.querySelector('.door-image');
+monApp.monsterOne = document.querySelector('.monster1');
+
+monApp.startGame = () => {
+
+
+
+
+
+}
+
+monApp.startGame();
