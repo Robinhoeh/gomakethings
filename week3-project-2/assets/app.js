@@ -29,15 +29,17 @@ const monsters = [
 
 const monApp = {};
 
-monApp.doorImage = document.querySelector('.door-image');
+monApp.grid = document.querySelector('.grid');
 monApp.monsterOne = document.querySelector('.monster1');
 
-monApp.startGame = () => {
+// Main function
+const startGame = () => {
 
-
-
+  monApp.grid.addEventListener('click', () => {
+    monApp.monsterOne.classList.toggle('.monster1')
+  }, false);
 
 
 }
 
-monApp.startGame();
+startGame();
