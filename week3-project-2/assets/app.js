@@ -1,6 +1,18 @@
+
+
+// when someone click on a door, a monster will appear
+// listen for click on door
+// hide door image and display moster image
+
+const monApp = {};
+
+monApp.app = document.querySelector('.app');
+monApp.grid = document.querySelector('.grid');
+let totalNumberOfMonsters;
+
 // The monsters and socks
 const monsters = [
-  'sock',
+  'sock!',
   'monster1.svg',
   'monster2.svg',
   'monster3.svg',
@@ -14,14 +26,7 @@ const monsters = [
   'monster11.svg'
 ];
 
-// when someone click on a door, a monster will appear
-// listen for click on door
-// hide door image and display moster image
-
-const monApp = {};
-
-monApp.app = document.querySelector('.app');
-monApp.grid = document.querySelector('.grid');
+// Methods
 
 monApp.shuffle = function (array) {
 
@@ -44,30 +49,94 @@ monApp.shuffle = function (array) {
   return array;
 };
 
+//Helper functions
+monApp.getMarkup = (monsters) => {
+  let markup = "";
+  monsters.forEach((monster, index) => {
+    markup += `
+    <div class="grid" data-monster="${monster}">
+    <button class="btn-unstyled"><img alt="Click Me" src="door.svg"></button>
+    </div>
+    `
+  })
+  return markup;
+}
+
+// Total number of doors opened
+monApp.updateTotal = () => {
+  monApp.totalNumberOfDoorOpened -= 1;
+  if(monApp.totalNumberOfDoorOpened === 1) {
+    monApp.renderWin();
+  }
+};
+
+monApp.renderWin = () => {
+  monApp.innerHTML =
+  `<img class="img-full" alt="" src="https://media.giphy.com/media/13zUNhE9WZspMc/giphy.gif">'
+  <h2>You Won!</h2>
+  <p>You found all the friends, congrats!</p>
+  <p><button class="btn" data-monster-play-again>Play Again</button>
+  </p>
+  `;
+};
+
+monApp.renderLoss = () => {
+  monApp.innerHTML =
+  `<img class="img-full" alt="" src="https://media.giphy.com/media/13zUNhE9WZspMc/giphy.gif">'
+  <h2>You found a sock!</h2>
+  <p><button class="btn" data-monster-play-again>Play Again</button>
+  </p`;
+};
+
 monApp.startGame = () => {
 
   monApp.app.classList.add('row');
   //shuffle monsters array
   monApp.randomMonsters = monApp.shuffle(monsters);
   //Reference list of monsters
-  monApp.markup = getMarkup(randomMonsters);
-
-
-  //Helper functions
-  monApp.getMarkup = (monsters) => {
-    let markup = "";
-    monsters.forEach((monster) => {
-      markup += `
-      <div class="grid" data-monster="${monster}">
-        <button class="btn-unstyled"><img alt="Click Me" src="door.svg"></button>
-      </div>
-      `
-    })
-    return monApp.markup;
-  }
+  monApp.markup = monApp.getMarkup(monApp.randomMonsters);
 
   // inject markup to App element
   monApp.app.innerHTML = monApp.markup;
+
+  //  Reset total
+  totalNumberOfMonsters = monsters.length;
 }
 
-monApp.startGame();
+  // Show monster after door is clicked
+  monApp.renderMonster = (monster) => {
+    monApp.monsterImg = monster.getAttribute('data-monster');
+    //if not a monster image, bail
+    if(!monApp.monsterImg) return;
+    //if its a sock - user loses, game over
+    if(monApp.monsterImg === 'sock!') {
+      monApp.renderLoss();
+    }
+    //show hidden monster
+    monster.innerHTML = `
+    <img alt="image of monster" ${monster.replace('.svg, ""')}src="${monApp.monsterImg}>
+    `;
+
+    //Remove attr
+    monApp.monster.removeAttribute('data-monster');
+
+    //updateTotal count of monsters
+    monApp.updateTotal();
+  };
+
+  // click handler
+  monApp.clickHandler = (e) => {
+    monster = e.target.closest('[data-monster]');
+    if(monster) {
+      monApp.renderMonster(monster);
+    }
+
+    // If clicked el was 'play again' button
+    if(e.target.matches('[data-monster-play-again]'));
+    //reset game
+    monApp.startGame();
+  };
+
+  monApp.startGame();
+  monApp.app.addEventListener('click', monApp.clickHandler, false);
+
