@@ -1,5 +1,3 @@
-
-
 // when someone click on a door, a monster will appear
 // listen for click on door
 // hide door image and display moster image
@@ -13,13 +11,13 @@ let totalNumberOfMonsters;
 // The monsters and socks
 const monsters = [
   'sock!',
-  'monster1.svg',
-  'monster2.svg',
-  'monster3.svg',
-  'monster4.svg',
-  'monster5.svg',
-  'monster6.svg',
-  'monster7.svg',
+  'assets/images/monster1.svg',
+  'assets/images/monster2.svg',
+  'assets/images/monster3.svg',
+  'assets/images/monster4.svg',
+  'assets/images/monster5.svg',
+  'assets/images/monster6.svg',
+  'assets/images/monster7.svg',
   'monster8.svg',
   'monster9.svg',
   'monster10.svg',
@@ -55,7 +53,7 @@ monApp.getMarkup = (monsters) => {
   monsters.forEach((monster, index) => {
     markup += `
     <div class="grid" data-monster="${monster}">
-    <button class="btn-unstyled"><img alt="Click Me" src="door.svg"></button>
+    <button class="btn-unstyled"><img alt="Click Me" src="assets/images/door.svg"></button>
     </div>
     `
   })
@@ -114,7 +112,7 @@ monApp.startGame = () => {
     }
     //show hidden monster
     monster.innerHTML = `
-    <img alt="image of monster" ${monster.replace('.svg, ""')}src="${monApp.monsterImg}>
+      <img alt="image of monster" ${monster.replace('.svg', "")}src="${monApp.monsterImg}">
     `;
 
     //Remove attr
@@ -126,8 +124,11 @@ monApp.startGame = () => {
 
   // click handler
   monApp.clickHandler = (e) => {
+    //check is thing that was clicked is inside an element with data-monster
+    // data-monster is attched to the parent div container
     monster = e.target.closest('[data-monster]');
     if(monster) {
+      // show the monster
       monApp.renderMonster(monster);
     }
 
