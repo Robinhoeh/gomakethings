@@ -69,7 +69,7 @@ monApp.updateTotal = () => {
 };
 
 monApp.renderWin = () => {
-  monApp.innerHTML =
+  monApp.app.innerHTML =
   `<img class="img-full" alt="" src="https://media.giphy.com/media/13zUNhE9WZspMc/giphy.gif">'
   <h2>You Won!</h2>
   <p>You found all the friends, congrats!</p>
@@ -79,7 +79,7 @@ monApp.renderWin = () => {
 };
 
 monApp.renderLoss = () => {
-  monApp.innerHTML =
+  monApp.app.innerHTML =
   `<img class="img-full" alt="" src="https://media.giphy.com/media/13zUNhE9WZspMc/giphy.gif">'
   <h2>You found a sock!</h2>
   <p><button class="btn" data-monster-play-again>Play Again</button>
@@ -104,9 +104,8 @@ monApp.startGame = () => {
   // Show monster after door is clicked
   monApp.renderMonster = (monster) => {
     monApp.monsterImg = monster.getAttribute('data-monster');
-    //if not a monster image, bail
     if(!monApp.monsterImg) return;
-    //if its a sock - user loses, game over
+
     if(monApp.monsterImg === 'sock!') {
       monApp.renderLoss();
     }
@@ -116,13 +115,14 @@ monApp.startGame = () => {
     <img alt="image of monster ${monApp.monName}" src="assets/images/${monApp.monsterImg}">
     `;
 
-
     //Remove attr
-    monApp.monster.removeAttribute('data-monster');
+    monApp.monsterImg.removeAttribute('data-monster');
 
     //updateTotal count of monsters
     monApp.updateTotal();
   };
+
+
 
   // click handler
   monApp.clickHandler = (e) => {
