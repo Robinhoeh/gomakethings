@@ -113,7 +113,7 @@ monApp.startGame = () => {
     //show hidden monster
     monApp.monName = monApp.monsterImg.replace('.svg', '');
     monster.innerHTML = `
-    <img alt="image of monster${monApp.monName}" src="${monApp.monsterImg}">
+    <img alt="image of monster ${monApp.monName}" src="assets/images/${monApp.monsterImg}">
     `;
 
 
