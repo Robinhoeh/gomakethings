@@ -11,13 +11,13 @@ let totalNumberOfMonsters;
 // The monsters and socks
 const monsters = [
   'sock!',
-  'assets/images/monster1.svg',
-  'assets/images/monster2.svg',
-  'assets/images/monster3.svg',
-  'assets/images/monster4.svg',
-  'assets/images/monster5.svg',
-  'assets/images/monster6.svg',
-  'assets/images/monster7.svg',
+  'monster1.svg',
+  'monster2.svg',
+  'monster3.svg',
+  'monster4.svg',
+  'monster5.svg',
+  'monster6.svg',
+  'monster7.svg',
   'monster8.svg',
   'monster9.svg',
   'monster10.svg',
@@ -111,9 +111,11 @@ monApp.startGame = () => {
       monApp.renderLoss();
     }
     //show hidden monster
+    monApp.monName = monApp.monsterImg.replace('.svg', '');
     monster.innerHTML = `
-      <img alt="image of monster" ${monster.replace('.svg', "")}src="${monApp.monsterImg}">
+    <img alt="image of monster${monApp.monName}" src="${monApp.monsterImg}">
     `;
+
 
     //Remove attr
     monApp.monster.removeAttribute('data-monster');
