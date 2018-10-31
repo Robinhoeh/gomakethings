@@ -25,7 +25,6 @@ const monsters = [
 ];
 
 // Methods
-
 monApp.shuffle = function (array) {
 
   let currentIndex = array.length;
@@ -86,7 +85,7 @@ monApp.renderLoss = () => {
   </p`;
 };
 
-monApp.startGame = () => {
+monApp.renderApp = () => {
   monApp.app.classList.add('row');
   //shuffle monsters array
   monApp.randomMonsters = monApp.shuffle(monsters);
@@ -100,45 +99,45 @@ monApp.startGame = () => {
   totalNumberOfMonsters = monsters.length;
 }
 
-  // Show monster after door is clicked
-  monApp.renderMonster = (monster) => {
-    monApp.monsterImg = monster.getAttribute('data-monster');
-    if(!monApp.monsterImg) return;
+// Show monster after door is clicked
+monApp.renderMonster = (monster) => {
+  const monsterImg = monster.getAttribute('data-monster');
+  if(!monsterImg) return;
 
-    if(monApp.monsterImg === 'sock!') {
-      monApp.renderLoss();
-    }
-    //show hidden monster
-    monApp.monName = monApp.monsterImg.replace('.svg', '');
-    monster.innerHTML = `
-    <img alt="image of monster ${monApp.monName}" src="assets/images/${monApp.monsterImg}">
-    `;
+  if(monsterImg === 'sock!') {
+    monApp.renderLoss();
+  }
+  //show hidden monster
+  const monName = monsterImg.replace('.svg', '');
+  monster.innerHTML = `
+  <img alt="image of monster ${monName}" src="assets/images/${monsterImg}">
+  `;
 
-    //Remove attr
-    monApp.monName.removeAttribute('data-monster');
+  //Remove attr
+  monName.removeAttribute('data-monster');
 
-    //updateTotal count of monsters
-    monApp.updateTotal();
-  };
+  //updateTotal count of monsters
+  monApp.updateTotal();
+};
 
 
 
-  // click handler
-  monApp.clickHandler = (e) => {
-    //check is thing that was clicked is inside an element with data-monster
-    // data-monster is attched to the parent div container
-    monster = e.target.closest('[data-monster]');
-    if(monster) {
-      // show the monster
-      monApp.renderMonster(monster);
-    }
+// click handler
+monApp.clickHandler = (e) => {
+  //check is thing that was clicked is inside an element with data-monster
+  // data-monster is attched to the parent div container
+  monster = e.target.closest('[data-monster]');
+  if(monster) {
+    // show the monster
+    monApp.renderMonster(monster);
+  }
 
-    // If clicked el was 'play again' button
-    if(e.target.matches('[data-monster-play-again]'));
-    //reset game
-    monApp.startGame();
-  };
+  // If clicked el was 'play again' button
+  if(e.target.matches('[data-monster-play-again]'));
+  //reset game
+  monApp.renderApp();
+};
 
-  monApp.startGame();
-  monApp.app.addEventListener('click', monApp.clickHandler, false);
+monApp.renderApp();
+monApp.app.addEventListener('click', monApp.clickHandler, false);
 
