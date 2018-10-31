@@ -26,36 +26,42 @@ const monsters = [
 
 // Methods
 monApp.shuffle = function (array) {
-
   let currentIndex = array.length;
   let temporaryValue;
   let randomIndex;
-
   // While there remain elements to shuffle...
   while (0 !== currentIndex) {
     // Pick a remaining element...
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
-
     // And swap it with the current element.
     temporaryValue = array[currentIndex];
     array[currentIndex] = array[randomIndex];
     array[randomIndex] = temporaryValue;
   }
-
   return array;
 };
 
-//Helper functions
-monApp.getMarkup = (monsters) => {
+// ------- Helper functions --------
+
+//pass in monsters array
+const monsterMarkup = (monsters) => {
+  // markup will contain markup of monster
   let markup = "";
-  monsters.forEach((monster, index) => {
+  //loop through monsters array
+  monsters.forEach((monster) => {
+    //create and inject markup for each monster
+    //button el makes it tabable and clickable
+    //
     markup += `
     <div class="grid" data-monster="${monster}">
-    <button class="btn-unstyled"><img alt="Click Me" src="assets/images/door.svg"></button>
+      <button class="btn-unstyled">
+       <img alt="Click Me" src="assets/images/door.svg">
+      </button>
     </div>
     `
-  })
+  });
+  //markup now holds every monster in it's own .grid div
   return markup;
 }
 
@@ -85,16 +91,16 @@ monApp.renderLoss = () => {
   </p`;
 };
 
+// Inject markup to DOM
 monApp.renderApp = () => {
+  // Inject markup
   monApp.app.classList.add('row');
   //shuffle monsters array
-  monApp.randomMonsters = monApp.shuffle(monsters);
+  const randomMonsters = monApp.shuffle(monsters);
   //Reference list of monsters
-  monApp.markup = monApp.getMarkup(monApp.randomMonsters);
-
-  // inject markup to App element
-  monApp.app.innerHTML = monApp.markup;
-
+  let markup = monsterMarkup(randomMonsters);
+  // inject monster markup to App element
+  monApp.app.innerHTML = markup;
   //  Reset total
   totalNumberOfMonsters = monsters.length;
 }
@@ -103,7 +109,6 @@ monApp.renderApp = () => {
 monApp.renderMonster = (monster) => {
   const monsterImg = monster.getAttribute('data-monster');
   if(!monsterImg) return;
-
   if(monsterImg === 'sock!') {
     monApp.renderLoss();
   }
@@ -112,10 +117,8 @@ monApp.renderMonster = (monster) => {
   monster.innerHTML = `
   <img alt="image of monster ${monName}" src="assets/images/${monsterImg}">
   `;
-
   //Remove attr
   monName.removeAttribute('data-monster');
-
   //updateTotal count of monsters
   monApp.updateTotal();
 };
