@@ -84,7 +84,9 @@ monApp.renderWin = () => {
   `;
 };
 
-monApp.renderLoss = () => {
+// render loss and display play again button inside the markup
+const renderLoss = () => {
+  //View only shows error message
   monApp.app.innerHTML =
   `<img class="img-full" alt="" src="https://media.giphy.com/media/13zUNhE9WZspMc/giphy.gif">'
   <h2>You found a sock!</h2>
@@ -121,8 +123,6 @@ const renderMonster = (monster) => {
   <img alt="image of monster ${monsterImg}.replace('.svg', '')" src="assets/images/${monsterImg}">
   `;
 
-  //updateTotal count of monsters
-  monApp.updateTotal();
 };
 
 
@@ -131,6 +131,12 @@ const clickHandler = (e) => {
   if (monster) {
     renderMonster(monster);
   }
+
+  if (e.target.macthes('data-monster-play-again')) {
+    // reset the game
+    renderApp();
+  }
+
 }
 
 monApp.renderApp();
