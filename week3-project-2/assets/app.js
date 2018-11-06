@@ -107,40 +107,26 @@ monApp.renderApp = () => {
 }
 
 // Show monster after door is clicked
-monApp.renderMonster = (monster) => {
+const renderMonster = (monster) => {
+  //checks if monster has attr of 'data-monster' in its element
   const monsterImg = monster.getAttribute('data-monster');
   if(!monsterImg) return;
+
   if(monsterImg === 'sock!') {
-    monApp.renderLoss();
+    renderLoss();
   }
+
   //show hidden monster
-  const monName = monsterImg.replace('.svg', '');
   monster.innerHTML = `
-  <img alt="image of monster ${monName}" src="assets/images/${monsterImg}">
+  <img alt="image of monster ${monsterImg}.replace('.svg', '')" src="assets/images/${monsterImg}">
   `;
-  //Remove attr
-  monName.removeAttribute('data-monster');
+
   //updateTotal count of monsters
   monApp.updateTotal();
 };
 
 
-
-// click handler
 const clickHandler = (e) => {
-  monster = e.target.closest('[data-monster]');
-  if(monster) {
-    // show the monster
-    monApp.renderMonster(monster);
-  }
-
-  // If clicked el was 'play again' button
-  if(e.target.matches('[data-monster-play-again]'));
-  //reset game
-  monApp.renderApp();
-};
-
-const clickhander = (e) => {
   monster = e.target.closest('[data-monster]');
   if (monster) {
     renderMonster(monster);
@@ -148,5 +134,5 @@ const clickhander = (e) => {
 }
 
 monApp.renderApp();
-monApp.app.addEventListener('click', monApp.clickHandler, false);
+monApp.app.addEventListener('click', clickHandler, false);
 
