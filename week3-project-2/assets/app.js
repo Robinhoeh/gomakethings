@@ -46,23 +46,24 @@ monApp.shuffle = function (array) {
 
 //pass in monsters array
 const monsterMarkup = (monsters) => {
-  // markup will contain markup of monster
-  let markup = "";
+  // let markup will contain markup of monster
+  let eachMonsterMarkup = "";
   //loop through monsters array
   monsters.forEach((monster) => {
     //create and inject markup for each monster
     //button el makes it tabable and clickable
-    //
-    markup += `
+    eachMonsterMarkup += `
     <div class="grid" data-monster="${monster}">
       <button class="btn-unstyled">
        <img alt="Click Me" src="assets/images/door.svg">
       </button>
     </div>
     `
+    //using data-monster allows you to store the image of the
+    // monster on the element
   });
   //markup now holds every monster in it's own .grid div
-  return markup;
+  return eachMonsterMarkup;
 }
 
 // Total number of doors opened
@@ -126,9 +127,7 @@ monApp.renderMonster = (monster) => {
 
 
 // click handler
-monApp.clickHandler = (e) => {
-  //check is thing that was clicked is inside an element with data-monster
-  // data-monster is attched to the parent div container
+const clickHandler = (e) => {
   monster = e.target.closest('[data-monster]');
   if(monster) {
     // show the monster
@@ -140,6 +139,13 @@ monApp.clickHandler = (e) => {
   //reset game
   monApp.renderApp();
 };
+
+const clickhander = (e) => {
+  monster = e.target.closest('[data-monster]');
+  if (monster) {
+    renderMonster(monster);
+  }
+}
 
 monApp.renderApp();
 monApp.app.addEventListener('click', monApp.clickHandler, false);
