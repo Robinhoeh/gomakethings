@@ -66,15 +66,10 @@ const monsterMarkup = (monsters) => {
   return eachMonsterMarkup;
 }
 
-// Total number of doors opened
-monApp.updateTotal = () => {
-  monApp.totalNumberOfDoorOpened -= 1;
-  if(monApp.totalNumberOfDoorOpened === 1) {
-    monApp.renderWin();
-  }
-};
 
-monApp.renderWin = () => {
+
+
+const renderWin = () => {
   monApp.app.innerHTML =
   `<img class="img-full" alt="" src="https://media.giphy.com/media/13zUNhE9WZspMc/giphy.gif">'
   <h2>You Won!</h2>
@@ -84,9 +79,21 @@ monApp.renderWin = () => {
   `;
 };
 
+// Total number of doors opened
+const updateTotal = () => {
+  // subtract 1 each time
+  totalNumberOfMonsters -= - 1;
+  if(totalNumberOfMonsters < 2) {
+    renderWin();
+  }
+}
+
+
+
 // render loss and display play again button inside the markup
 const renderLoss = () => {
   //View only shows error message
+  //innerHTML will wipe out everyelse in DOM and replace wiith template literal below
   monApp.app.innerHTML =
   `<img class="img-full" alt="" src="https://media.giphy.com/media/13zUNhE9WZspMc/giphy.gif">'
   <h2>You found a sock!</h2>
@@ -123,6 +130,12 @@ const renderMonster = (monster) => {
   <img alt="image of monster ${monsterImg}.replace('.svg', '')" src="assets/images/${monsterImg}">
   `;
 
+  monster.removeAttribute('data-monster');
+
+  // Update the total number of monsters remaining
+  updateTotal();
+
+
 };
 
 
@@ -132,7 +145,8 @@ const clickHandler = (e) => {
     renderMonster(monster);
   }
 
-  if (e.target.macthes('data-monster-play-again')) {
+  // if button clicked on has play again button data attr
+  if (e.target.matches('data-monster-play-again')) {
     // reset the game
     renderApp();
   }
