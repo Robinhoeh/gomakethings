@@ -3,10 +3,9 @@
 // hide door image and display moster image
 
 const monApp = {};
-
+let totalNumberOfMonsters;
 monApp.app = document.querySelector('.app');
 monApp.grid = document.querySelector('.grid');
-let totalNumberOfMonsters;
 
 // The monsters and socks
 const monsters = [
@@ -23,6 +22,8 @@ const monsters = [
   'monster10.svg',
   'monster11.svg'
 ];
+
+
 
 // Methods
 monApp.shuffle = function (array) {
@@ -67,7 +68,15 @@ const monsterMarkup = (monsters) => {
 }
 
 
-
+// Total number of doors opened
+const updateTotal = () => {
+  // subtract 1 each time
+  totalNumberOfMonsters = totalNumberOfMonsters - 1;
+  console.log(totalNumberOfMonsters);
+  if(totalNumberOfMonsters < 2) {
+    renderWin();
+  }
+}
 
 const renderWin = () => {
   monApp.app.innerHTML =
@@ -78,16 +87,6 @@ const renderWin = () => {
   </p>
   `;
 };
-
-// Total number of doors opened
-const updateTotal = () => {
-  // subtract 1 each time
-  totalNumberOfMonsters -= - 1;
-  if(totalNumberOfMonsters < 2) {
-    renderWin();
-  }
-}
-
 
 
 // render loss and display play again button inside the markup
@@ -102,7 +101,7 @@ const renderLoss = () => {
 };
 
 // Inject markup to DOM
-monApp.renderApp = () => {
+const renderApp = () => {
   // Inject markup
   monApp.app.classList.add('row');
   //shuffle monsters array
@@ -134,25 +133,23 @@ const renderMonster = (monster) => {
 
   // Update the total number of monsters remaining
   updateTotal();
-
-
 };
 
 
 const clickHandler = (e) => {
-  monster = e.target.closest('[data-monster]');
+  const monster = e.target.closest('[data-monster]');
   if (monster) {
     renderMonster(monster);
   }
 
   // if button clicked on has play again button data attr
-  if (e.target.matches('data-monster-play-again')) {
+  if (e.target.matches('[data-monster-play-again]')) {
     // reset the game
     renderApp();
   }
 
 }
 
-monApp.renderApp();
+renderApp();
 monApp.app.addEventListener('click', clickHandler, false);
 
