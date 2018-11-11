@@ -118,6 +118,7 @@ const renderApp = () => {
 const renderMonster = (monster) => {
   //checks if monster has attr of 'data-monster' in its element
   const monsterImg = monster.getAttribute('data-monster');
+  console.log(monsterImg);
   if(!monsterImg) return;
 
   if(monsterImg === 'sock!') {
@@ -126,8 +127,10 @@ const renderMonster = (monster) => {
 
   //show hidden monster
   monster.innerHTML = `
-  <img alt="image of monster ${monsterImg}.replace('.svg', '')" src="assets/images/${monsterImg}">
+  <img alt=image of ${monsterImg}.replace('.svg', '') src="assets/images/${monsterImg}">
   `;
+
+  // monster.innerHTML = '<img alt="' + monsterImg.replace('.svg', '') + '" src="' + monsterImg + '">';
 
   monster.removeAttribute('data-monster');
 
