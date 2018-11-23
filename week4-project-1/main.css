@@ -18,15 +18,14 @@ li{
 }
 .tab-container{
   display: flex;
+  width: 100%;
+  max-width: 600px;
 }
 .tab-pane{
   padding: 0 5px;
   border: 1px solid grey;
-}
-
-.tab-pane{
   display: none;
 }
-.tab-pane:first-child{
+.tab-pane.active{
   display: block;
 }
