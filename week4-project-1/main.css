@@ -14,6 +14,7 @@ li{
   border-right: 1px solid grey;
   border-left: 1px solid grey;
   margin-bottom: 0;
+  cursor: pointer;
 }
 .tab-container{
   display: flex;
@@ -21,4 +22,11 @@ li{
 .tab-pane{
   padding: 0 5px;
   border: 1px solid grey;
+}
+
+.tab-pane{
+  display: none;
+}
+.tab-pane:first-child{
+  display: block;
 }
